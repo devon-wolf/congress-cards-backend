@@ -17,11 +17,16 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE congressfolk (
                     id SERIAL PRIMARY KEY NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    cool_factor INTEGER NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    chamber VARCHAR(512) NOT NULL,
+                    state VARCHAR(512) NOT NULL,
+                    seniority INTEGER NOT NULL,
+                    party VARCHAR(512) NOT NULL,
+                    rogue_factor DECIMAL NOT NULL,
+                    db_id VARCHAR(512) NOT NULL,
+                    user_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
 
