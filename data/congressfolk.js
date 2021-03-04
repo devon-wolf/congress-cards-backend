@@ -5,7 +5,7 @@ module.exports = [
     state: 'AL',
     seniority: 24,
     party: 'R',
-    rogue_factor: 6.29,
+    rogue_factor: '6.29',
     db_id: 'A000055'
   },
   {
@@ -14,7 +14,7 @@ module.exports = [
     state: 'ND',
     seniority: 2,
     party: 'R',
-    rogue_factor: 6.58,
+    rogue_factor: '6.58',
     db_id: 'A000377'
   },
   {
@@ -23,7 +23,7 @@ module.exports = [
     state: 'CA',
     seniority: 10,
     party: 'D',
-    rogue_factor: 1.67,
+    rogue_factor: '1.67',
     db_id: 'B001270'
   }
 ];

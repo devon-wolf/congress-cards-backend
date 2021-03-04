@@ -607,7 +607,6 @@ describe('app routes', () => {
         db_id: 'B001243',
         user_id: 2
       };
-      
 
       const data = await fakeRequest(app)
         .post('/api/my-congress')
@@ -617,8 +616,37 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual(expectation);
+
+      // const fetchData = await fakeRequest(app)
+      //   .get('/api/my-congress')
+      //   .set({ Authorization: token });
+
+      // expect(fetchData.body).toEqual(expectation);
     });
 
+
+    test('Gets the user collection', async() => {
+
+      const expectation = [{
+        id: 4,
+        name: 'Marsha Blackburn',
+        chamber: 'Senate',
+        state: 'TN',
+        seniority: 1,
+        party: 'R',
+        rogue_factor: '5.99',
+        db_id: 'B001243',
+        user_id: 2
+      }];
+      
+      const data = await fakeRequest(app)
+        .get('/api/my-congress')
+        .set({ Authorization: token })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.rows).toEqual(expectation);
+    });
 
 
 

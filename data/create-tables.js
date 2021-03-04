@@ -24,7 +24,7 @@ async function run() {
                     state VARCHAR(512) NOT NULL,
                     seniority INTEGER NOT NULL,
                     party VARCHAR(512) NOT NULL,
-                    rogue_factor NUMERIC NOT NULL,
+                    rogue_factor VARCHAR(512) NOT NULL,
                     db_id VARCHAR(512) NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
