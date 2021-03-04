@@ -616,12 +616,6 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual(expectation);
-
-      // const fetchData = await fakeRequest(app)
-      //   .get('/api/my-congress')
-      //   .set({ Authorization: token });
-
-      // expect(fetchData.body).toEqual(expectation);
     });
 
 
@@ -645,7 +639,30 @@ describe('app routes', () => {
         .expect('Content-Type', /json/)
         .expect(200);
 
-      expect(data.rows).toEqual(expectation);
+      expect(data.body).toEqual(expectation);
+    });
+
+    test('Deletes a congressperson from the user collection by ID', async() => {
+
+      const expectation = {
+        id: 4,
+        name: 'Marsha Blackburn',
+        chamber: 'Senate',
+        state: 'TN',
+        seniority: 1,
+        party: 'R',
+        rogue_factor: '5.99',
+        db_id: 'B001243',
+        user_id: 2
+      };
+      
+      const data = await fakeRequest(app)
+        .delete('/api/my-congress/4')
+        .set({ Authorization: token })
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
     });
 
 
