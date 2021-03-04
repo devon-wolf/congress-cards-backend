@@ -533,7 +533,6 @@ describe('app routes', () => {
           'votes_against_party_pct': 5.99
         }
       ];
-        
 
       const data = await fakeRequest(app)
         .get('/api/congress/senate')
@@ -546,7 +545,79 @@ describe('app routes', () => {
       expect(truncatedData).toEqual(expectation);
     });
 
+    test('Adds a congressperson to the user collection', async() => {
 
+      const rawCongressperson =         {
+        'id': 'B001243',
+        'title': 'Senator, 1st Class',
+        'short_title': 'Sen.',
+        'api_uri': 'https://api.propublica.org/congress/v1/members/B001243.json',
+        'first_name': 'Marsha',
+        'middle_name': null,
+        'last_name': 'Blackburn',
+        'suffix': null,
+        'date_of_birth': '1952-06-06',
+        'gender': 'F',
+        'party': 'R',
+        'leadership_role': null,
+        'twitter_account': 'MarshaBlackburn',
+        'facebook_account': 'marshablackburn',
+        'youtube_account': 'RepMarshaBlackburn',
+        'govtrack_id': '400032',
+        'cspan_id': '31226',
+        'votesmart_id': '25186',
+        'icpsr_id': '20351',
+        'crp_id': 'N00003105',
+        'google_entity_id': '/m/01fnkt',
+        'fec_candidate_id': 'H2TN06030',
+        'url': 'https://www.blackburn.senate.gov',
+        'rss_url': null,
+        'contact_form': 'https://www.blackburn.senate.gov/contact_marsha',
+        'in_office': false,
+        'cook_pvi': null,
+        'dw_nominate': 0.619,
+        'ideal_point': null,
+        'seniority': '1',
+        'next_election': '2024',
+        'total_votes': 717,
+        'missed_votes': 12,
+        'total_present': 0,
+        'last_updated': '2020-12-30 19:01:18 -0500',
+        'ocd_id': 'ocd-division/country:us/state:tn',
+        'office': '357 Dirksen Senate Office Building',
+        'phone': '202-224-3344',
+        'fax': null,
+        'state': 'TN',
+        'senate_class': '1',
+        'state_rank': 'junior',
+        'lis_id': 'S396',
+        'missed_votes_pct': 1.67,
+        'votes_with_party_pct': 94.01,
+        'votes_against_party_pct': 5.99
+      };
+
+      const expectation = {
+        id: 4,
+        name: 'Marsha Blackburn',
+        chamber: 'Senate',
+        state: 'TN',
+        seniority: 1,
+        party: 'R',
+        rogue_factor: '5.99',
+        db_id: 'B001243',
+        user_id: 2
+      };
+      
+
+      const data = await fakeRequest(app)
+        .post('/api/my-congress')
+        .set({ Authorization: token })
+        .send(rawCongressperson)
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(data.body).toEqual(expectation);
+    });
 
 
 
